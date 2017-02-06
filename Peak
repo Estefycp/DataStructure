@@ -1,0 +1,29 @@
+//A00344189 Estefany Calderon
+public class Peak{
+
+
+	public static void main(String[] args) {
+		
+		int[] array= {5454,200,66,5,7,8,9,10,11,9898};
+		System.out.println(OneDRecursive(array,0,array.length-1,array.length));
+	}
+
+	public static int OneDRecursive(int [] array, int start,int end,int n){
+
+	    int mid = start + (end - start)/2;  //encontrar el elemnto de enmedio
+	    System.out.println(mid);
+	 
+	    // Si mid es 0 o mid es mayor que mid-1 y (mid es n-1 o mid es mayor que mid+1) se encuentra el peak y se regresa
+	    if ((mid == start || array[mid-1] <= array[mid]) && (mid == n-1 || array[mid+1] <= array[mid]))
+	        return array[mid];
+	 
+	    // si mid -1 es mayor que mid vuelve a buscar
+	    else if (mid > 0 && array[mid-1] > array[mid])
+	        return OneDRecursive(array, start, (mid -1), n);
+	 
+	    // si mid+1 es mayor que mid 
+	    else return OneDRecursive(array, (mid + 1), end, n);
+		
+	
+	}
+}
