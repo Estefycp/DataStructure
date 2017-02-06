@@ -1,0 +1,22 @@
+//A00344189 Estefy Calderon
+public class RecString{
+
+
+	public static void main(String[] args) {
+		
+	}
+
+	public static int StrLen(String palabra, int longitud){
+
+		int contador;
+
+		if(longitud == 0){
+			return 0;
+		}
+		else{
+			return 1+Strlen(palabra,palabra.length()-1);
+		}
+	}
+
+
+}
