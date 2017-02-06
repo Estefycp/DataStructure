@@ -1,0 +1,94 @@
+import java.util.EmptyStackException;
+/**
+ * 
+ * Esta clase hace una queue circular
+ * 
+ * @author estefy
+ *
+ * @param <T> contenido
+ * 
+ * @version 1.0
+ * 
+ *
+ */
+public class Queue<T> {
+
+	int capacidadDefault = 100;
+	T[] array;
+	int first,
+		last,
+		size;
+
+	
+	public QueueMio(){
+		this.array = (T[]) new Object[capacidadDefault];
+		this.first=0;
+		this.last=0;
+		this.size=0;
+		
+	}
+	
+	public QueueMio(int capacidad){
+		this.array = (T[]) new Object[capacidad];
+		this.first=0;
+		this.last=0;
+		this.size=0;
+	}
+
+	public boolean isEmpty(){
+		return this.size==0;
+	}
+	/**
+	 * 
+	 * @return regresa el primer elemento de la queue
+	 */
+	public T dequeue(){
+		if(!isEmpty()){
+			T temp=array[first];
+			array[first] = null;
+			this.first=(first+1)%array.length;
+			size--;
+			return temp;
+		}
+		
+		throw new EmptyStackException();
+	}
+	/**
+	 * 
+	 * @param valor a meter
+	 * 
+	 * mete en la queue el valor que le pasas
+	 */
+	
+	public void enqueue(T value){
+		if(this.size==array.length){
+			this.duplica();
+		}
+		else{
+			array[this.last]=value;
+			this.last=(this.last+1)%array.length;
+			this.size++;
+			
+		}
+	}
+	
+	public T front(){
+		return array[first];
+	}
+	
+	public T rear(){
+		return array[last];
+	}
+	
+	private void duplica(){
+		T[] newArray = (T[]) new Object[this.array.length*2];
+		for(int i=0; i<size;i++){
+			newArray[i]= array[first];
+			first=(first+1)% array.length;
+		}
+		first=0;
+		last=size;
+		this.array=newArray;
+		
+	}
+}
